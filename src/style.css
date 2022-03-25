@@ -1,0 +1,433 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* Begin Styles */
+
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+
+:root {
+	/* Fonts */
+	--font-family: "Poppins", sans-serif;
+	--font-primary-clr: #3d3d3d;
+	--font-secondary-clr: var(--clr-neutral);
+
+	--fs-700: 1.75rem;
+	--fs-400: 1rem;
+	--fs-500: 1.1rem;
+	--fs-300: 0.875rem;
+
+	--fw-400: 500;
+	--fw-600: 600;
+	--fw-700: 700;
+	--fw-900: 900;
+
+	/* General */
+	--border-radius: 10px;
+	--border-radius-round: 100px;
+	--box-shadow: 0px 2px 4px rgb(0 0 0 / 0.3);
+	--gap: 1rem;
+
+	/* Colors */
+	--clr-primary: #dc202e;
+	--clr-neutral: white;
+	--clr-bg: #ccc;
+
+	/* Card */
+	--card-width: max(320px);
+	--card-img-height: 200px;
+	--card-padding: 1rem;
+	--card-logo-height: 27px;
+	--card-tag-height: 23px;
+	--tag-gap: 5px;
+	--dot-width: 10px;
+	--dot-clr: ;
+	--dot-quick-clr: orange;
+	--dot-ok-clr: green;
+	--dot-na-clr: red;
+	--date-container-size: 48px;
+	--urgency-txt-dec: auto;
+}
+
+body {
+	font-family: var(--font-family);
+	background: var(--body-primary-bg);
+	color: var(--font-primary-clr);
+	background: var(--clr-bg);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	gap: var(--gap);
+	width: max(50vw, 1000px);
+	flex-wrap: wrap;
+}
+.card {
+	position: relative;
+
+	width: var(--card-width);
+	background: var(--clr-neutral);
+	border-radius: var(--border-radius);
+	box-shadow: var(--box-shadow);
+	/* height: 400px; */
+}
+.card__header {
+	position: relative;
+	overflow: hidden;
+
+	border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+.card__imageContainer {
+	position: relative;
+	height: var(--card-img-height);
+}
+.card__imageContainer::after {
+	content: "";
+
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	width: 100%;
+	height: 100%;
+
+	background: black;
+	opacity: 0.4;
+}
+.card__imageContainer img {
+	width: 100%;
+	height: var(--card-img-height);
+	object-fit: cover;
+
+	filter: grayscale();
+	transition: filter 0.2s ease-in-out;
+}
+
+.card:hover .card__imageContainer img {
+	filter: grayscale(0);
+}
+.card__dateContainer,
+.card__logoContainer,
+.card__tagContainer {
+	position: absolute;
+}
+
+.card__dateContainer {
+	top: var(--card-padding);
+	left: var(--card-padding);
+	width: var(--date-container-size);
+	aspect-ratio: 1;
+	border-radius: var(--border-radius);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+.card__dateContainer .day,
+.card__dateContainer .month {
+	width: 100%;
+	height: 50%;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.card__dateContainer .day {
+	font-size: 0.9em;
+	background: var(--clr-neutral);
+	font-weight: bolder;
+}
+.card__dateContainer .month {
+	font-size: 0.8em;
+	color: var(--font-secondary-clr);
+	background: var(--clr-primary);
+}
+.card__logoContainer {
+	height: var(--card-logo-height);
+	bottom: var(--card-padding);
+	left: var(--card-padding);
+}
+.card__logoContainer img {
+	height: var(--card-logo-height);
+	width: 100%;
+}
+.card__tagContainer {
+	height: var(--card-tag-height);
+	bottom: var(--card-padding);
+	right: var(--card-padding);
+	pointer-events: none;
+}
+.card__tagContainer .urgency {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--clr-neutral);
+	border-radius: var(--border-radius-round);
+	gap: var(--tag-gap);
+	padding-inline: calc(var(--tag-gap) * 2);
+	height: 100%;
+}
+.card__tagContainer .urgency .circle {
+	width: var(--dot-width);
+	aspect-ratio: 1;
+	background: var(--dot-clr);
+	border-radius: var(--border-radius-round);
+	animation: fade 2s ease infinite;
+}
+.na .circle {
+	--dot-clr: var(--dot-na-clr);
+	animation: none !important;
+}
+.na {
+	--urgency-txt-dec: line-through;
+}
+.isDisabled {
+	cursor: not-allowed;
+	pointer-events: none;
+	opacity: 0.5;
+}
+.quick .circle {
+	--dot-clr: var(--dot-quick-clr);
+}
+.available .circle {
+	--dot-clr: var(--dot-ok-clr);
+	animation: none !important;
+}
+.card__tagContainer .urgency .text {
+	font-size: 0.8em;
+	text-decoration: var(--urgency-txt-dec);
+}
+@keyframes fade {
+	0% {
+		opacity: 1;
+	}
+	25% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	75% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.card__footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	position: relative;
+
+	gap: calc(var(--gap) * 1.5);
+	padding: var(--card-padding);
+}
+.card__footer > button.btn.outline {
+	margin-top: auto;
+}
+.card-list-header {
+	display: flex;
+	flex-direction: column;
+
+	padding: calc(var(--gap) / 3);
+	padding-left: calc(var(--gap));
+
+	position: relative;
+	gap: calc(var(--gap) / 3);
+}
+.card-list-header::before {
+	content: "";
+
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	width: calc(var(--gap) / 3);
+	height: 100%;
+	background: var(--clr-primary);
+	border-radius: var(--border-radius);
+}
+.card__title {
+	color: var(--clr-primary);
+	font-size: var(--fs-500);
+	font-weight: var(--fw-600);
+	line-height: 1;
+}
+
+.card__footer-list,
+.card__dates-list {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	gap: calc(var(--gap) / 2);
+}
+.card__footer-list li {
+	display: flex;
+	align-items: center;
+	gap: calc(var(--gap) / 2);
+}
+.card__list-icon {
+	width: 20px;
+}
+.card__footer-list i,
+.card__list-icon i {
+	color: var(--clr-primary);
+	margin-right: calc(var(--gap) / 3);
+}
+.card__list-bold {
+	font-weight: var(--fw-700);
+}
+.button-group {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--gap);
+	width: 100%;
+}
+.btn {
+	border: none;
+	text-decoration: none;
+	padding-block: calc(var(--gap) / 2);
+	padding-inline: calc(var(--gap) * 1.5);
+	display: inline;
+	font-weight: var(--fw-700);
+	cursor: pointer;
+	border-radius: var(--border-radius-round);
+	width: max-content;
+	transition: all 0.2s ease-in-out;
+}
+.card .btn {
+	display: block;
+}
+.btn.outline {
+	color: var(--clr-primary);
+	border: 1px solid var(--clr-primary);
+	background: transparent;
+}
+
+.card__dates.show {
+	top: calc(100% + (var(--gap) / 3));
+	opacity: 1;
+	visibility: visible;
+	pointer-events: all;
+	z-index: 1;
+}
+.btn.filled {
+	color: var(--clr-neutral);
+	background: var(--clr-primary);
+	border: none;
+}
+.card__dates {
+	position: absolute;
+	top: calc(50% + (var(--gap) / 3));
+
+	pointer-events: none;
+	opacity: 0;
+	visibility: hidden;
+
+	width: 100%;
+	background: var(--clr-neutral);
+	border-radius: var(--border-radius);
+	box-shadow: var(--box-shadow);
+	padding: var(--gap);
+	transition: all 0.3s ease-in-out;
+	z-index: -1;
+}
+.card__dates-list li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	border-bottom: 1px solid #e3e3e3;
+	padding-block: var(--gap);
+}
+.card__dates-list li:last-child {
+	border-bottom: none;
+}
+.card__dates-list .date {
+	display: flex;
+	gap: calc(var(--gap) / 2);
+}
